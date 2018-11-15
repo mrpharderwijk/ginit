@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import 'babel-polyfill';
 
 const chalk       = require('chalk');
 const clear       = require('clear');
@@ -66,7 +67,8 @@ const run = async () => {
       if (err) {
         switch (err.code) {
           case 401:
-            console.log(chalk.red('Couldn\'t log you in. Please provide correct credentials/token.'));
+            const error = err.message;
+            console.log(error);
             break;
           case 422:
             console.log(chalk.red('There already exists a remote repository with the same name'));

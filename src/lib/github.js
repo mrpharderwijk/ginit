@@ -1,6 +1,6 @@
 const octokit     = require('@octokit/rest')();
 const Configstore = require('configstore');
-const pkg         = require('../package.json');
+const pkg         = require('../../package.json');
 const _           = require('lodash');
 const CLI         = require('clui');
 const Spinner     = CLI.Spinner;
@@ -35,7 +35,8 @@ module.exports = {
     try {
       const response = await octokit.authorization.create({
         scopes: ['user', 'public_repo', 'repo', 'repo:status'],
-        note: 'ginits, the command-line tool for initalizing Git repos'
+        note: 'ginits, the command-line tool for initalizing Git repos',
+        headers: { "X-GitHub-OTP": "<your 2FA token>" }
       });
       const token = response.data.token;
       if(token) {
